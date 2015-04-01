@@ -1,8 +1,4 @@
 #!/usr/bin/python
-#This script uses AdwareMedic’s signatures to scan and detect installed adware on macs.
-#The below cURL grabs the signatures and the URL itself is subject to change as it is not publicly made available.
-#curl http://www.adwaremedic.com/signatures.xml
-
 import os
 
 user = os.popen("echo $(ls -la /dev/console | cut -d \" \" -f 4)").read().split("\n")[0]
