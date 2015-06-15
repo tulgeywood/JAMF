@@ -1,9 +1,11 @@
 #!/usr/bin/python
 import os
 
-user = os.popen("echo $(ls -la /dev/console | cut -d \" \" -f 4)").read().split("\n")[0]
+user = os.popen("/usr/bin/stat -f%Su /dev/console").read().split("\n")[0]
+print 'Current user: ' + user
 
-signatures = os.popen("curl http://www.adwaremedic.com/signatures.xml").readlines()
+signatures = os.popen(
+    "curl -s http://www.adwaremedic.com/signatures.xml").readlines()
 
 result = "<result>"
 
@@ -16,7 +18,8 @@ for line in signatures:
             if "relativeTo=" in line:
                 path = line.split("relativeTo=\"")[1].split("\"")[0]
                 if path == "home":
-                    path = "/Users/" + user + "/" + line.split("</item>")[0].split(">")[1]
+                    path = "/Users/" + user + "/" + \
+                        line.split("</item>")[0].split(">")[1]
                     if "." in path:
                         if os.path.isfile(path) and adware not in result:
                             result = result + adware + "\n"
@@ -30,7 +33,7 @@ for line in signatures:
                         result = result + adware + "\n"
                 else:
                     if os.path.isdir(path) and adware not in result:
-                       result = result + adware + "\n"
+                        result = result + adware + "\n"
 
 if result == "<result>":
     print result + "No adware detected</result>"
