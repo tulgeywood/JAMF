@@ -31,7 +31,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
 #create ejector.sh script
 echo '#!/bin/sh
 sleep 20
-if $(ping -q -c 1 ldapmaster.colo.lair > /dev/null); then
+if $(ping -q -c 1 SOME_INTERNAL_SERVER > /dev/null); then
         if $(system_profiler SPDisplaysDataType | grep -q "Display Serial Number:"); then
                 while read line; do
                         if $(system_profiler SPDisplaysDataType | grep -q "$line") &&                             \
