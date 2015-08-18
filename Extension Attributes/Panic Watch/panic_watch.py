@@ -2,7 +2,7 @@
 from datetime import datetime
 import os
 
-panic_files = os.popen("echo $(ls /Library/Log/DiagnosticReport/*.panic)").read().split()
+panic_files = os.popen("echo $(ls /Library/Logs/DiagnosticReports/*.panic)").read().split()
 panic_dates = []
 time_format = "%Y-%m-%d"
 date_differences = []
